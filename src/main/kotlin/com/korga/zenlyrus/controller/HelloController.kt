@@ -1,16 +1,24 @@
 package com.korga.zenlyrus.controller
 
+import com.korga.zenlyrus.model.dto.UserDTO
+import com.korga.zenlyrus.service.UserService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping(value = ["/hello"])
+@RequestMapping(value = ["/user"])
 class HelloController {
 
-    @GetMapping("/hi")
-    fun hello(): ResponseEntity<Any>{
-        return ResponseEntity.ok("Andry Pidor")
+    @Autowired
+    lateinit var userService: UserService
+
+    @PostMapping("/addNewUser")
+    fun hello(@RequestBody userDTO: UserDTO): ResponseEntity<Any>{
+        userService.addNewUser(userDTO.username, userDTO.password)
+        return ResponseEntity.ok().build()
     }
 }

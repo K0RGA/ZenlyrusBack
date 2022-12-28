@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "3.0.0"
 	id("io.spring.dependency-management") version "1.1.0"
+	kotlin("plugin.lombok") version "1.7.21"
+	id("io.freefair.lombok") version "5.3.0"
 	kotlin("jvm") version "1.7.21"
 	kotlin("plugin.spring") version "1.7.21"
 	kotlin("plugin.jpa") version "1.3.72"
@@ -38,11 +40,11 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	
+	compileOnly ("org.projectlombok:lombok:1.18.24")
+	annotationProcessor ("org.projectlombok:lombok:1.18.24")
 
 	runtimeOnly("org.postgresql:postgresql")
 
-	//testImplementation("org.springframework.boot:spring-boot-starter-test")
-	//testImplementation("org.testcontainers:testcontainers:$testContainersVer")
-	//testImplementation("org.testcontainers:postgresql:$testContainersVer")
 }
 
