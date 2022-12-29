@@ -15,4 +15,12 @@ class User {
 
     @Column(name = "password", unique = false, nullable = false)
     var password: String? = null
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "friend_list",
+        joinColumns = [JoinColumn(name = "first_user_id", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "second_user_id", referencedColumnName = "id")],
+    )
+    var friendList: MutableSet<User>? = null
 }
